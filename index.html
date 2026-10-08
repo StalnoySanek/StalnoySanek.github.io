@@ -4,125 +4,313 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
     <!-- Bootstrap 4.5.3 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" crossorigin="anonymous">
     <title>Породы кошек</title>
 
     <style>
-        .footer {margin-top: 80px; padding: 20px 0; background-color: #f8f9fa; text-align: center;}
-        h1 {margin-top: 20px;}
+        /* --- Общие стили --- */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #fdfbf7; /* Тёплый светлый фон */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+
+        h1 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Декоративная линия под заголовком H1 */
+        h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #e67e22; /* Оранжевый акцент */
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #e67e22;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #d35400;
+            text-decoration: none;
+        }
+
+        /* --- Навигация --- */
+        .navbar {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background-color: #ffffff !important;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #e67e22 !important;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: #555 !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #e67e22 !important;
+        }
+
+        /* --- Списки --- */
+        ul.custom-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.custom-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        ul.custom-list li::before {
+            content: '🐾'; /* Иконка лапки вместо маркера */
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1.2rem;
+        }
+
+        /* --- Карточки --- */
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.08); /* Лёгкое увеличение картинки при наведении */
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
         .post-name {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        /* Фиксируем высоту картинок для аккуратного вида сетки */
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
+
+        /* --- Видео и блоки --- */
+        .embed-responsive {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-block {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            margin-top: 30px;
+        }
+
+        /* --- Футер --- */
+        .footer {
+            margin-top: 80px;
+            padding: 30px 0;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #e67e22;
+        }
+
+        .footer a:hover {
+            color: #f39c12;
+        }
+
+        /* --- Адаптивность для очень маленьких экранов --- */
+        @media (max-width: 576px) {
+            h1 { font-size: 2rem; }
+            .card-img-top { height: 180px; }
         }
     </style>
   </head>
   <body>
 
     <!-- Навигация -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">Cats</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">🐱 Cats Gallery</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Породы
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="https://www.purina.ru/find-a-pet/cat-breeds" target="_blank">Каталог Purina</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/">Все</a>
-            </div>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Породы
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="https://www.purina.ru/find-a-pet/cat-breeds" target="_blank">Каталог Purina</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/">Все породы</a>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
     <main role="main" class="container mt-4">
       <div class="starter-template">
-        <!-- Заголовки и блочные элементы -->
-        <h1>Породы кошек и виды котов</h1>
-        <p>Мир кошек удивителен и разнообразен. Ниже представлены некоторые популярные породы, их особенности и полезные материалы.</p>
         
-        <section class="mt-4">
+        <section>
+          <h1>Породы кошек и виды котов</h1>
+          <p class="lead">Мир кошек удивителен и разнообразен. Ниже представлены некоторые популярные породы, их особенности и полезные материалы для любителей животных.</p>
+        </section>
+        
+        <section class="info-block">
           <h2>Популярные породы</h2>
-          <p>Некоторые из самых известных пород включают:</p>
-          <ul>
-            <li><strong>Британская короткошерстная:</strong> спокойная, независимая, с плюшевой шерстью.</li>
-            <li><strong>Мейн-кун:</strong> крупная, дружелюбная, с кисточками на ушах.</li>
-            <li><strong>Сиамская:</strong> грациозная, голосистая и очень преданная хозяину.</li>
+          <p>Некоторые из самых известных и любимых пород включают:</p>
+          
+          <!-- Список с кастомными стилями -->
+          <ul class="custom-list">
+            <li><strong>Британская короткошерстная:</strong> спокойная, независимая, с плюшевой шерстью и круглыми глазами.</li>
+            <li><strong>Мейн-кун:</strong> крупная, дружелюбная, с кисточками на ушах и пушистым хвостом.</li>
+            <li><strong>Сиамская:</strong> грациозная, голосистая, очень умная и преданная своему хозяину.</li>
           </ul>
           
-          <h3 class="mt-4">Галерея (адаптивная сетка)</h3>
-          <p>Сетка адаптируется под размер экрана: 6 по 1 (XL), 3 по 2 (LG), 2 по 3 (MD), 1 по 6 (мобильные).</p>
+          <h3 class="mt-5">Галерея</h3>
+          <p class="text-muted mb-4">Сетка адаптируется под размер экрана: 6 в ряд (XL), 3 в ряд (LG), 2 в ряд (MD), 1 в ряд (мобильные).</p>
           
+          <!-- Гридовая сетка Bootstrap: 6 картинок -->
           <div class="row">
+            <!-- Картинка 1 -->
             <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
               <div class="card h-100">
                 <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop" class="card-img-top" alt="Британская кошка">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                   <h5 class="card-title post-name">Британская</h5>
-                  <p class="card-text small">Спокойная и независимая.</p>
+                  <p class="card-text small flex-grow-1">Спокойная и независимая.</p>
                 </div>
               </div>
             </div>
+            <!-- Картинка 2 -->
             <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
               <div class="card h-100">
                 <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=300&fit=crop" class="card-img-top" alt="Мейн-кун">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                   <h5 class="card-title post-name">Мейн-кун</h5>
-                  <p class="card-text small">Крупная и дружелюбная.</p>
+                  <p class="card-text small flex-grow-1">Крупная и дружелюбная.</p>
                 </div>
               </div>
             </div>
+            <!-- Картинка 3 -->
             <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
               <div class="card h-100">
                 <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400&h=300&fit=crop" class="card-img-top" alt="Сиамская кошка">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                   <h5 class="card-title post-name">Сиамская</h5>
-                  <p class="card-text small">Голосистая и преданная.</p>
+                  <p class="card-text small flex-grow-1">Голосистая и преданная.</p>
                 </div>
               </div>
             </div>
+            <!-- Картинка 4 -->
             <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
               <div class="card h-100">
                 <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400&h=300&fit=crop" class="card-img-top" alt="Сфинкс">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                   <h5 class="card-title post-name">Сфинкс</h5>
-                  <p class="card-text small">Ласковая и без шерсти.</p>
+                  <p class="card-text small flex-grow-1">Ласковая и без шерсти.</p>
                 </div>
               </div>
             </div>
+            <!-- Картинка 5 -->
             <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
               <div class="card h-100">
                 <img src="https://images.unsplash.com/photo-1529778873920-4da4926a7071?w=400&h=300&fit=crop" class="card-img-top" alt="Бенгальская кошка">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                   <h5 class="card-title post-name">Бенгальская</h5>
-                  <p class="card-text small">Активная и пятнистая.</p>
+                  <p class="card-text small flex-grow-1">Активная и пятнистая.</p>
                 </div>
               </div>
             </div>
+            <!-- Картинка 6 -->
             <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
               <div class="card h-100">
                 <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&h=300&fit=crop" class="card-img-top" alt="Персидская кошка">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                   <h5 class="card-title post-name">Персидская</h5>
-                  <p class="card-text small">Пушистая и спокойная.</p>
+                  <p class="card-text small flex-grow-1">Пушистая и спокойная.</p>
                 </div>
               </div>
             </div>
           </div>
+        </section>
+
+        <!-- Блочный элемент с видео и ссылкой -->
+        <section class="info-block mt-4">
+          <h2>Видео о кошках</h2>
+          <div class="embed-responsive embed-responsive-16by9 mb-4">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/8Ti55TgqMZU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p>
+            Хотите узнать больше о породах, уходе и питании? Посетите официальный каталог: 
+            <a href="https://www.purina.ru/find-a-pet/cat-breeds" target="_blank" rel="noopener noreferrer"><strong>Purina: Породы кошек</strong></a>.
+          </p>
         </section>
 
       </div>
@@ -130,12 +318,23 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">© 2026 Cats Gallery. Все права защищены.</span>
+        <p class="mb-1">© 2026 Cats Gallery. Сделано с любовью к котикам 🐾</p>
+        <small class="text-muted" style="color: #bdc3c7 !important;">Развернуто на GitHub Pages</small>
       </div>
     </footer>
+
+    <!-- Скрипты -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Инициализация DataTable только если элемент существует на странице
+            if ($('#example').length) {
+                $('#example').DataTable();
+            }
+        });
+    </script>
   </body>
 </html>
