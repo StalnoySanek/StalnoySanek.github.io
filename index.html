@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 4.5.3 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" crossorigin="anonymous">
+    <title>Породы кошек</title>
+
+    <style>
+        .footer {margin-top: 80px; padding: 20px 0; background-color: #f8f9fa; text-align: center;}
+        h1 {margin-top: 20px;}
+        .post-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* Фиксируем высоту картинок для аккуратного вида сетки */
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+  </head>
+  <body>
+
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Cats</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Породы
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="https://www.purina.ru/find-a-pet/cat-breeds" target="_blank">Каталог Purina</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/">Все</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="container mt-4">
+      <div class="starter-template">
+        <!-- Заголовки и блочные элементы -->
+        <h1>Породы кошек и виды котов</h1>
+        <p>Мир кошек удивителен и разнообразен. Ниже представлены некоторые популярные породы, их особенности и полезные материалы.</p>
+        
+        <section class="mt-4">
+          <h2>Популярные породы</h2>
+          <p>Некоторые из самых известных пород включают:</p>
+          <ul>
+            <li><strong>Британская короткошерстная:</strong> спокойная, независимая, с плюшевой шерстью.</li>
+            <li><strong>Мейн-кун:</strong> крупная, дружелюбная, с кисточками на ушах.</li>
+            <li><strong>Сиамская:</strong> грациозная, голосистая и очень преданная хозяину.</li>
+          </ul>
+          
+          <h3 class="mt-4">Галерея (адаптивная сетка)</h3>
+          <p>Сетка адаптируется под размер экрана: 6 по 1 (XL), 3 по 2 (LG), 2 по 3 (MD), 1 по 6 (мобильные).</p>
+          
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
+              <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop" class="card-img-top" alt="Британская кошка">
+                <div class="card-body">
+                  <h5 class="card-title post-name">Британская</h5>
+                  <p class="card-text small">Спокойная и независимая.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
+              <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=300&fit=crop" class="card-img-top" alt="Мейн-кун">
+                <div class="card-body">
+                  <h5 class="card-title post-name">Мейн-кун</h5>
+                  <p class="card-text small">Крупная и дружелюбная.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
+              <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400&h=300&fit=crop" class="card-img-top" alt="Сиамская кошка">
+                <div class="card-body">
+                  <h5 class="card-title post-name">Сиамская</h5>
+                  <p class="card-text small">Голосистая и преданная.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
+              <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=400&h=300&fit=crop" class="card-img-top" alt="Сфинкс">
+                <div class="card-body">
+                  <h5 class="card-title post-name">Сфинкс</h5>
+                  <p class="card-text small">Ласковая и без шерсти.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
+              <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1529778873920-4da4926a7071?w=400&h=300&fit=crop" class="card-img-top" alt="Бенгальская кошка">
+                <div class="card-body">
+                  <h5 class="card-title post-name">Бенгальская</h5>
+                  <p class="card-text small">Активная и пятнистая.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-2 mb-4">
+              <div class="card h-100">
+                <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&h=300&fit=crop" class="card-img-top" alt="Персидская кошка">
+                <div class="card-body">
+                  <h5 class="card-title post-name">Персидская</h5>
+                  <p class="card-text small">Пушистая и спокойная.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mt-5">
+          <h2>Видео о кошках</h2>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/8Ti55TgqMZU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="mt-3">
+            Хотите узнать больше о породах? Посетите официальный каталог: 
+            <a href="https://www.purina.ru/find-a-pet/cat-breeds" target="_blank" rel="noopener noreferrer">Purina: Породы кошек</a>.
+          </p>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">© 2026 Cats Gallery. Все права защищены.</span>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+  </body>
+</html>
